@@ -3,7 +3,7 @@
     "name": "react-native-number-guessing-game",
     "slug": "react-native-number-guessing-game",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "backgroundColor": "#121212",
     "userInterfaceStyle": "light",

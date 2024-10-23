@@ -65,20 +65,22 @@ export default function App() {
   if (!loaded && !error) return null;
 
   return (
-    <LinearGradient
-      style={styles.rootScreen}
-      colors={[Colors.surface600, Colors.surfaceMixed600]}
-    >
-      <ImageBackground
-        source={require("@/assets/images/background.png")}
-        resizeMode="cover"
+    <>
+      <LinearGradient
         style={styles.rootScreen}
-        imageStyle={{ opacity: 0.1 }}
+        colors={[Colors.surface600, Colors.surfaceMixed600]}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-      <StatusBar style="auto" />
-    </LinearGradient>
+        <ImageBackground
+          source={require("@/assets/images/background.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={{ opacity: 0.1 }}
+        >
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+      <StatusBar style="light" />
+    </>
   );
 }
 

@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import Title from "@/components/ui/Title";
 import Card from "@/components/ui/Card";
 import InstructionText from "@/components/ui/InstructionText";
@@ -12,6 +19,9 @@ interface StartGameScreenProps {
 
 const StartGameScreen = ({ onPickNumber }: StartGameScreenProps) => {
   const [enteredNumber, setEnteredNumber] = useState("");
+
+  const { height } = useWindowDimensions();
+  const marginTop = height < 460 ? 48 : 100;
 
   const numberInputHandler = (enteredText: string) => {
     setEnteredNumber(enteredText);
@@ -35,28 +45,37 @@ const StartGameScreen = ({ onPickNumber }: StartGameScreenProps) => {
   };
 
   return (
-    <View style={styles.rootContainer}>
-      <Title>Guess My Number</Title>
-      <Card>
-        <InstructionText>Enter a Number</InstructionText>
-        <NumberInput value={enteredNumber} onChangeText={numberInputHandler} />
-        <FormActions
-          primaryActionTitle="Confirm"
-          onPrimaryAction={confirmInputHandler}
-          secondaryActionTitle="Reset"
-          onSecondaryAction={resetInputHandler}
-        />
-      </Card>
-    </View>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, { marginTop }]}>
+          <Title>Guess My Number</Title>
+          <Card>
+            <InstructionText>Enter a Number</InstructionText>
+            <NumberInput
+              value={enteredNumber}
+              onChangeText={numberInputHandler}
+            />
+            <FormActions
+              primaryActionTitle="Confirm"
+              onPrimaryAction={confirmInputHandler}
+              secondaryActionTitle="Reset"
+              onSecondaryAction={resetInputHandler}
+            />
+          </Card>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     alignItems: "center",
-    marginTop: 100,
   },
 });
